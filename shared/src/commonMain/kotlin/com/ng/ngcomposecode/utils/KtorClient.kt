@@ -39,24 +39,24 @@ suspend fun <T> safeCall(
 ): Result<T> {
 	return try {
 		val result = call(client)
-		NgLog.i(KTOR_TAG) { "Request succeed: $result" }
+		NgLog.i(KTOR_TAG, "Request succeed: $result")
 		Result(data = result)
 	} catch (e: ConnectTimeoutException) {
-		NgLog.i(KTOR_TAG) { "Connection timed out: ${e.message}" }
+		NgLog.i(KTOR_TAG, "Connection timed out: ${e.message}")
 		Result(exception = e)
 	} catch (e: HttpRequestTimeoutException) {
-		NgLog.i(KTOR_TAG) { "Request timed out: ${e.message}" }
+		NgLog.i(KTOR_TAG, "Request timed out: ${e.message}")
 		Result(exception = e)
 	} catch (e: ClientRequestException) {
 		// 4xx responses
-		NgLog.i(KTOR_TAG) { "Client request error: ${e.response.status.description}" }
+		NgLog.i(KTOR_TAG, "Client request error: ${e.response.status.description}")
 		Result(exception = e)
 	} catch (e: ServerResponseException) {
 		// 5xx responses
-		NgLog.i(KTOR_TAG) { "Server response error: ${e.response.status.description}" }
+		NgLog.i(KTOR_TAG, "Server response error: ${e.response.status.description}")
 		Result(exception = e)
 	} catch (e: Exception) {
-		NgLog.i(KTOR_TAG) { "An unexpected error occurred: ${e.message}" }
+		NgLog.i(KTOR_TAG, "An unexpected error occurred: ${e.message}")
 		Result(exception = e)
 	}
 }

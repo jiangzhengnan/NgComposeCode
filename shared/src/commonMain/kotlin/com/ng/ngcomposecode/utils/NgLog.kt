@@ -26,27 +26,27 @@ object NgLog {
         isLoggingEnabled = enable
     }
 
-    fun d(tag: String, message: () -> String) {
+    fun d(tag: String, message: String) {
         if (isLoggingEnabled && currentLogLevel <= LogLevel.DEBUG) {
-            print(LogLevel.DEBUG, tag, message.invoke())
+            print(LogLevel.DEBUG, tag, message)
         }
     }
 
-    fun i(tag: String, message: () -> String) {
+    fun i(tag: String, message: String) {
         if (isLoggingEnabled && currentLogLevel <= LogLevel.INFO) {
-            print(LogLevel.INFO, tag, message.invoke())
+            print(LogLevel.INFO, tag, message)
         }
     }
 
-    fun w(tag: String, message: () -> String) {
+    fun w(tag: String, message: String) {
         if (isLoggingEnabled && currentLogLevel <= LogLevel.WARNING) {
-            print(LogLevel.WARNING, tag, message.invoke())
+            print(LogLevel.WARNING, tag, message)
         }
     }
 
-    fun e(tag: String, message: () -> String) {
+    fun e(tag: String, message: String) {
         if (isLoggingEnabled && currentLogLevel <= LogLevel.ERROR) {
-            print(LogLevel.ERROR, tag, message.invoke())
+            print(LogLevel.ERROR, tag, message)
         }
     }
 }

@@ -24,13 +24,13 @@ class ReadViewModel : ViewModel() {
 			apiGet<BasicBean<List<NaviWrapper>>>("https://www.wanandroid.com/navi/json")
 				.disposeSucceed {
 					if (it.data?.isNotEmpty() == true) {
-						NgLog.d("ReadViewModel ") { "fetchData success" }
+						NgLog.d("ReadViewModel ", "fetchData success")
 						_data.value = it.data
 					} else {
-						NgLog.e("ReadViewModel") { "fetchData fail" }
+						NgLog.e("ReadViewModel", "fetchData fail")
 					}
 				}.disposeFailed {
-					NgLog.e("ReadViewModel") { "fetchData fail:" + it.message.toString() }
+					NgLog.e("ReadViewModel", "fetchData fail:" + it.message.toString())
 				}
 		}
 	}

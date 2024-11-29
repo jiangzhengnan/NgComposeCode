@@ -72,7 +72,7 @@ fun MyPage() {
 		ArrowRightListItem(
 			iconRes = Icons.Default.Home, title = "Github 主页"
 		) {
-			NgLog.i("MyPage") { "跳转github" }
+			NgLog.i("MyPage", "跳转github")
 //			mainViewModel.handIntent(
 //				MainViewAction.OpenWeb(
 //					WebData(
