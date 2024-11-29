@@ -26,8 +26,6 @@ struct ComposeUIViewControllerRepresentable: UIViewControllerRepresentable {
 }
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
 	var body: some View {
         ComposeUIViewControllerRepresentable()
                  .edgesIgnoringSafeArea(.all) // 如果只想忽略水平方向的 Safe Area
