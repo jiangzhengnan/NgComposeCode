@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -23,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.ng.ngcomposecode.utils.PAGE_APP_HOME_ROUTE
 import com.ng.ngcomposecode.utils.pages
 import com.ng.ngcomposecode.function.home.HomePage
 import com.ng.ngcomposecode.function.my.MyPage
@@ -33,9 +33,12 @@ import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
+import com.health.navigation.Navigation
+
+const val PAGE_HEALTH_APP_ROUTE = "/health"
 
 val LocalNavigator = staticCompositionLocalOf<Navigator> {
-	error("Navigator not provided")
+	error("No Navigator provided")
 }
 
 data class TabOptions(
@@ -46,35 +49,38 @@ data class TabOptions(
 	val content: @Composable () -> Unit
 )
 
-
 @Composable
 fun App() {
-	// 路由层
-	PreComposeApp {
-		// your app's content goes here
-		val navigator = rememberNavigator()
-		CompositionLocalProvider(LocalNavigator provides navigator) {
-			NavHost(
-				// Assign the navigator to the NavHost
-				navigator = navigator,
-				// Navigation transition for the scenes in this NavHost, this is optional
-				navTransition = NavTransition(),
-				// The start destination
-				initialRoute = PAGE_APP_HOME_ROUTE,
-			) {
-				pages.forEach {
+	MaterialTheme {
+		// 路由层
+		PreComposeApp {
+			val navigator = rememberNavigator()
+			CompositionLocalProvider(LocalNavigator provides navigator) {
+				NavHost(
+					navigator = navigator,
+					navTransition = NavTransition(),
+					initialRoute = PAGE_HEALTH_APP_ROUTE,
+				) {
+					// 健康应用路由
 					scene(
-						// Scene's route path
-						route = it.route,
-						// Navigation transition for this scene, this is optional
+						route = PAGE_HEALTH_APP_ROUTE,
 						navTransition = NavTransition(),
-						content = it.content
-					)
+					) {
+						Navigation()
+					}
+					
+					// 保留其他路由
+					pages.forEach {
+						scene(
+							route = it.route,
+							navTransition = NavTransition(),
+							content = it.content
+						)
+					}
 				}
 			}
 		}
 	}
-
 }
 
 @Composable

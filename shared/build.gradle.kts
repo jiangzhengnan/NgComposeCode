@@ -68,6 +68,8 @@ kotlin {
                 // 本地资源3
                 api("dev.icerock.moko:resources:0.24.1")
                 api("dev.icerock.moko:resources-compose:0.24.1")
+                // 添加日期时间处理库
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
             }
         }
         commonTest.dependencies {
